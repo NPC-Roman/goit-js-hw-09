@@ -1,24 +1,26 @@
 const startButton = document.querySelector('[data-start]');
 const stopButton = document.querySelector('[data-stop]');
-let intervalId;
+let intervalId = 0;
 
-function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')}`;
 }
 
 function changeBackgroundColor() {
-  document.body.style.backgroundColor = getRandomColor();
+  document.body.style.backgroundColor = getRandomHexColor();
 }
 
 startButton.addEventListener('click', () => {
-  intervalId = setInterval(changeBackgroundColor, 1000); // Зміна кольору кожну секунду
+  if (!intervalId) {
+    startButton.disabled = true;
+    intervalId = setInterval(changeBackgroundColor, 666);
+  }
 });
 
 stopButton.addEventListener('click', () => {
   clearInterval(intervalId);
+  intervalId = 0;
+  startButton.disabled = false;
 });
