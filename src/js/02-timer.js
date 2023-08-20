@@ -85,10 +85,9 @@ startButton.addEventListener('click', () => {
     }, 1000);
   }
 });
-
+/*
 function convertMs(ms) {
-  // ... (your existing convertMs function)
-}
+}*/
 
 function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
